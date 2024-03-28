@@ -3,7 +3,7 @@
 #
 
 # Add source to this project's executable.
-add_executable (Assigment1 "Game.cpp" "Game.h" "game_title.h" "util.cpp" "util.h")
+add_executable (Assigment1 "Game.cpp" "Game.h" "game_title.h" "util.cpp" "util.h" "Moons/AbstractMoon.h" "main.cpp" "Moons/AbstractMoon.cpp" "Weather/Weather.cpp" "Weather/Weather.h" "Weather/Clear.h" "Weather/Flooded.h" "Weather/Flooded.cpp" "Weather/Stormy.cpp" "Weather/Stormy.h" "Weather/Eclipsed.cpp" "Weather/Eclipsed.h")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Assigment1 PROPERTY CXX_STANDARD 20)
