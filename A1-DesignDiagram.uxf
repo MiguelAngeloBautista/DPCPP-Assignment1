@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>5</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>800</x>
+      <y>365</y>
+      <w>125</w>
+      <h>145</h>
+    </coordinates>
+    <panel_attributes>Game
+--
+- itemManager: ItemManager
+- moonManager: MoonManager
+- rng: RandomNumberGenerator
+
+- balance: int
+- currentMoon: AbstractMoon*
+- currentPhase: std::string
+- currentDay: int
+- cargoValue: int
+- aliveEmployees: int
+
+
+--
+land()
+leave()
+exit()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>810</x>
+      <y>250</y>
+      <w>105</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>ItemManager
+--
+allGameItems[]: Item*
+boughtItems[]: Item*
+--
+inventory()
+store()
+buy(std::string item)
+registerItem(Item* item)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>605</x>
+      <y>460</y>
+      <w>145</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>MoonManager
+--
+- allGameMoons[]: AbstractMoon
+--
+moons()
+route(std::string moon): AbstractMoon* moon
+registerMoon(AbstractMoon* moon)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>580</x>
+      <y>605</y>
+      <w>195</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>/AbstractMoon/
+--
+- simulator: Simulator
+- moonName: std::string
+- currentWeatherCondition: Weather
+- static enum MoonWeather{ Clear = 0, Flooded, Eclisped, Stormy }
+- baseSurvivalChance: float
+- minScrapValue: int
+- maxScrapValue: int
+--
+/virtual sendEmployees(Game&amp; g, int count, simulator): int/
+/virtual name(): std::string/
+/virtual scrapValues(): minValue, maxValue/
+/virtual survivalChance(): float/
+/virtual weather(): Weather/
+/virtual onDayBegin(Game&amp; g)/
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>795</x>
+      <y>105</y>
+      <w>135</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>/AbstractItem/
+--
+- name: std::string
+- price: int
+- scrapMultiplier: float
+- explorerSurvivalMultiplier: float
+- operatorSurvivalMultiplier: float
+- explorerSaveChance: float
+- lootRecoveryMultiplier: float
+--
+/virtual multipliers(): mult1, mult2, .../
+/virtual price(): int/
+/virtaul name(): std::string/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>855</x>
+      <y>315</y>
+      <w>50</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=1
+contains ^</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>670</x>
+      <y>420</y>
+      <w>140</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=1
+contains v</panel_attributes>
+    <additional_attributes>260.0;20.0;10.0;20.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>670</x>
+      <y>550</y>
+      <w>50</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=1..*
+contains v</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>855</x>
+      <y>200</y>
+      <w>50</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=1..*
+contains ^</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>135</x>
+      <y>785</y>
+      <w>195</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Corporation
+--
+- moonName= "Corporation"
+--
+sellCargo(Game&amp; g, int amount)
+name(): std::string
+onDayBegin(Game&amp; g)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>360</x>
+      <y>785</y>
+      <w>195</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Prototyping
+--
+- moonName: "Prototyping"
+- currentWeatherCondition: WeatherCondition
+- baseSurvivalChance= 0.50
+- minScrapValue= 3
+- maxScrapValue= 30
+--
+sendEmployeers(Game&amp; g, int count)
+name(): std::string
+scrapValues(): minValue, maxValue
+survivalChance(): float
+weather(): Weather
+onDayBegin(Game&amp; g)
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>580</x>
+      <y>785</y>
+      <w>195</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Insurance 
+--
+- moonName: "Insurance"
+- currentWeatherCondition: WeatherCondition
+- baseSurvivalChance= 0.45
+- minScrapValue= 5
+- maxScrapValue= 50
+--
+sendEmployeers(Game&amp; g, int count)
+name(): std::string
+scrapValues(): minValue, maxValue
+survivalChance(): float
+weather(): Weather
+onDayBegin(Game&amp; g)
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>795</x>
+      <y>785</y>
+      <w>195</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Pledge
+--
+- moonName: "Pledge"
+- currentWeatherCondition: WeatherCondition
+- baseSurvivalChance= 0.40
+- minScrapValue= 30
+- maxScrapValue= 50
+--
+sendEmployeers(Game&amp; g, int count)
+name(): std::string
+scrapValues(): minValue, maxValue
+survivalChance(): float
+weather(): Weather
+onDayBegin(Game&amp; g)
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1010</x>
+      <y>785</y>
+      <w>195</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Defence
+--
+- moonName: "Defence"
+- currentWeatherCondition: WeatherCondition
+- baseSurvivalChance= 0.35
+- minScrapValue= 10
+- maxScrapValue= 70
+--
+sendEmployeers(Game&amp; g, int count)
+name(): std::string
+scrapValues(): minValue, maxValue
+survivalChance(): float
+weather(): Weather
+onDayBegin(Game&amp; g)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>535</y>
+      <w>195</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>/Weather/
+--
+- name: std::string
+--
+/virtual multipliers(): {{std::string, float}, {std::string, float}} .../
+/virtual name(): std::string/
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>160</x>
+      <y>450</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Clear
+--
+- name: std::string
+--
+name(): std::string
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>160</x>
+      <y>500</y>
+      <w>150</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Flooded
+--
+- name: std::string
+--
+multipliers(): {"explorerSurvivalMultiplier", 0.7}
+name(): std::string
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>160</x>
+      <y>565</y>
+      <w>150</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Stormy
+--
+- name: std::string
+--
+multipliers(): {"scrapMultiplier", 0.75}
+name(): std::string
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>625</y>
+      <w>260</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Eclipsed
+--
+- name: std::string
+--
+multipliers(): {"explorerSurvivalMultiplier", 0.9}, {"operatorSurvivalMultiplier", 0.7}
+name(): std::string
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>305</x>
+      <y>465</y>
+      <w>55</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>90.0;190.0;40.0;190.0;40.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>305</x>
+      <y>520</y>
+      <w>30</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>40.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>305</x>
+      <y>555</y>
+      <w>30</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>40.0;10.0;40.0;200.0;10.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>305</x>
+      <y>585</y>
+      <w>30</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>40.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>670</x>
+      <y>730</y>
+      <w>15</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>230</x>
+      <y>750</y>
+      <w>455</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>890.0;10.0;10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>450</x>
+      <y>750</y>
+      <w>15</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>885</x>
+      <y>750</y>
+      <w>15</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>670</x>
+      <y>750</y>
+      <w>445</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;870.0;10.0;870.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>10</y>
+      <w>105</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>Flashlight
+--
+- name: std::string
+- price= 60
+- explorerSurvivalMultiplier= 1.05
+--
+multipliers(): explorer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>570</x>
+      <y>10</y>
+      <w>105</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>Shovel
+--
+- name: std::string
+- price= 100
+explorerSurvivalMultiplier= 1.05
+--
+multipliers(): explorer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>690</x>
+      <y>10</y>
+      <w>105</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>ProFlashlight
+--
+- name: std::string
+- price= 200
+explorerSurvivalMultiplier= 1.10
+--
+multipliers(): explorer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>810</x>
+      <y>10</y>
+      <w>105</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>Teleporter
+--
+- name: std::string
+- price= 300
+explorerSaveChance= 0.33
+--
+multipliers(): explorerSave</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>930</x>
+      <y>10</y>
+      <w>105</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>InverseTeleporter
+--
+- name: std::string
+- price= 400
+- scrapMultiplier= 1.10
+- explorerSurvivalMultiplier= 0.8
+--
+multipliers(): explorer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1050</x>
+      <y>10</y>
+      <w>105</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>Backpack
+--
+- name: std::string
+- price= 500
+- lootRecoveryMultiplier= 1.25
+--
+multipliers(): lootRecovery</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1170</x>
+      <y>10</y>
+      <w>110</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>HydraulicsMk2
+--
+- name: std::string
+- price= 1000
+- operatorSurvivalMultiplier= 1.25
+--
+multipliers(): operator</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>755</x>
+      <y>150</y>
+      <w>55</w>
+      <h>255</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..*
+m2=1
+registers ^</panel_attributes>
+    <additional_attributes>80.0;10.0;10.0;10.0;10.0;480.0;90.0;480.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>855</x>
+      <y>70</y>
+      <w>15</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1100</x>
+      <y>70</y>
+      <w>15</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>855</x>
+      <y>70</y>
+      <w>385</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;50.0;750.0;50.0;750.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>495</x>
+      <y>70</y>
+      <w>375</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>730.0;50.0;10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>980</x>
+      <y>70</y>
+      <w>15</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>740</x>
+      <y>70</y>
+      <w>15</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>620</x>
+      <y>70</y>
+      <w>15</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>505</y>
+      <w>140</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..*
+m2=1
+registers v</panel_attributes>
+    <additional_attributes>10.0;330.0;190.0;330.0;190.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>555</y>
+      <w>90</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=1
+&lt; has this weather</panel_attributes>
+    <additional_attributes>130.0;100.0;130.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1030</x>
+      <y>385</y>
+      <w>395</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Simulator
+--
+
+
+
+--
+simulate(int aliveEmployees, AbstactMoon* currentMoon, Item[] boughtItems): deadExplorers, deadOperators, totalRevenue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>420</y>
+      <w>270</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+simulates &gt;</panel_attributes>
+    <additional_attributes>10.0;570.0;400.0;570.0;400.0;10.0;520.0;10.0</additional_attributes>
+  </element>
+</diagram>
