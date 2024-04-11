@@ -3,7 +3,7 @@
 Game::Game() {
     // ItemManager itemManager = new ItemManager();
     
-    // SimulatorManager simulatorManager;
+    // SimulatorManager simulator;
     // RandomNumberGenerator rng = new RandomNumberGenerator();
     
     moonManager = new MoonManager();
@@ -27,7 +27,14 @@ Game::Game() {
 
 Game::~Game() {
     delete moonManager;
+    //delete itemManager;
+    //delete simulator;
+    //delete rng;
 
+    moonManager = nullptr;
+    //itemManager = nullptr;
+    //simulator = nullptr;
+    //rng = nullptr;
 }
 
 
@@ -48,9 +55,7 @@ void Game::leave() {
 }
 
 void Game::exit() {
-    currentMoon = nullptr;
-    /*delete itemManager;
-    delete rng;*/
+    //Exit process but not destructor
 
 }
 
@@ -86,6 +91,10 @@ int Game::getBalance() {
 
 int Game::getCurrentDay() {
     return currentDay;
+}
+
+void Game::setCurrentMoon(AbstractMoon* moon) {
+    currentMoon = moon;
 }
 
 AbstractMoon* Game::getCurrentMoon() {

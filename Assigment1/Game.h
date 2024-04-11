@@ -27,10 +27,11 @@ public:
 	void addBalance(int num);
 	int getBalance();
 	int getCurrentDay();
+	void setCurrentMoon(AbstractMoon* moon);
 	AbstractMoon* getCurrentMoon();
 	phases getCurrentPhase() const;
-private:
 	MoonManager* moonManager;
+private:
 	int balance;
 	AbstractMoon* currentMoon;
 	phases currentPhase;
