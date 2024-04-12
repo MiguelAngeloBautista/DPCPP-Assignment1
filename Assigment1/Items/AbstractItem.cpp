@@ -10,7 +10,7 @@ std::unordered_map<std::string, float> AbstractItem::multipliers() const
     return{ {"scrapMultiplier", 1.0},
         {"explorerSurvivalMultiplier", 1.0},
         {"operatorSurvivalMultiplier", 1.0},
-        {"explorerSaveChange", 0.0},
+        {"explorerSaveChance", 0.0},
         {"lootRecoveryMultiplier", 0.5}
     };
 }
