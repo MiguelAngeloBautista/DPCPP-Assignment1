@@ -27,6 +27,7 @@ public:
     virtual void setWeather(MoonWeathers weather) = 0;
     virtual void sellCargo(Game& g, int amount);
     virtual int price() const = 0;
+    virtual std::string type() const = 0;
 protected:
     std::string moonName;
     MoonWeathers currentWeatherCondition;
@@ -34,6 +35,7 @@ protected:
     int minScrapValue;
     int maxScrapValue;
     int moonPrice;
+    std::string moonType;
 };
 
 

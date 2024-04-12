@@ -1,10 +1,10 @@
-#ifndef PLEDGE_H
-#define PLEDGE_H
+#ifndef HYPERION_H
+#define HYPERION_H
 #include "AbstractMoon.h"
 
-class Pledge : public AbstractMoon {
+class Hyperion : public AbstractMoon {
 public:
-    Pledge();
+    Hyperion();
     void onDayBegin(Game& g) const override;
     void setWeather(MoonWeathers weather) override;
     const std::string& name() const;
@@ -12,8 +12,8 @@ public:
     std::tuple<int, int> scrapValues() const override;
     float survivalChance() const override;
     std::string weather() const override;
-    int price() const override;
+    int price() const;
     std::string type() const override;
 };
 
-#endif // PLEDGE_H
+#endif //HYPERION_H

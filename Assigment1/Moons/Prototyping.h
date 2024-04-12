@@ -14,6 +14,8 @@ public:
     std::tuple<int, int> scrapValues() const override;
     float survivalChance() const override;
     std::string weather() const override;
+    int price() const override;
+    std::string type() const override;
 };
 
 #endif // PROTOTYPING_H

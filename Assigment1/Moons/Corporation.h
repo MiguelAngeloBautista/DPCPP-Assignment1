@@ -15,12 +15,8 @@ public:
     std::tuple<int, int> scrapValues() const override;
     float survivalChance() const override;
     std::string weather() const override;
-////public:
-//    std::string moonName;
-//    MoonWeathers currentWeatherCondition;
-//    float baseSurvivalChance;
-//    int minScrapValue;
-//    int maxScrapValue;
+    int price() const override;
+    std::string type() const override;
 };
 
 #endif // CORPORATION_H

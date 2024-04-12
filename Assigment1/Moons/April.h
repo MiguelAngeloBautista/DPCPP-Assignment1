@@ -1,10 +1,10 @@
-#ifndef PLEDGE_H
-#define PLEDGE_H
+#ifndef APRIL_H
+#define APRIL_H
 #include "AbstractMoon.h"
 
-class Pledge : public AbstractMoon {
+class April : public AbstractMoon {
 public:
-    Pledge();
+    April();
     void onDayBegin(Game& g) const override;
     void setWeather(MoonWeathers weather) override;
     const std::string& name() const;
@@ -12,8 +12,8 @@ public:
     std::tuple<int, int> scrapValues() const override;
     float survivalChance() const override;
     std::string weather() const override;
-    int price() const override;
+    int price() const;
     std::string type() const override;
 };
 
-#endif // PLEDGE_H
+#endif //APRIL_H

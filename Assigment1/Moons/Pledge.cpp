@@ -35,3 +35,11 @@ float Pledge::survivalChance() const {
 std::string Pledge::weather() const {
     return AbstractMoon::weather();
 }
+
+int Pledge::price() const {
+    return AbstractMoon::price();
+}
+
+std::string Pledge::type() const {
+    return AbstractMoon::type();
+}

@@ -35,3 +35,11 @@ float Insurance::survivalChance() const {
 std::string Insurance::weather() const {
     return AbstractMoon::weather();
 }
+
+int Insurance::price() const {
+    return AbstractMoon::price();
+}
+
+std::string Insurance::type() const {
+    return AbstractMoon::type();
+}

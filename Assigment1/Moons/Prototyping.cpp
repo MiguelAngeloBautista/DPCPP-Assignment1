@@ -36,3 +36,11 @@ float Prototyping::survivalChance() const {
 std::string Prototyping::weather() const {
     return AbstractMoon::weather();
 }
+
+int Prototyping::price() const {
+    return AbstractMoon::price();
+}
+
+std::string Prototyping::type() const {
+    return AbstractMoon::type();
+}

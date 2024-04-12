@@ -9,6 +9,8 @@ Corporation::Corporation() {
     baseSurvivalChance = 1.0;
     minScrapValue = 0;
     maxScrapValue = 0;
+    moonPrice = 0;
+    moonType = "Free";
 }
 
 void Corporation::sellCargo(Game& g, int amount) {
@@ -53,4 +55,12 @@ float Corporation::survivalChance() const {
 std::string Corporation::weather() const
 {
     return AbstractMoon::weather();
+}
+
+int Corporation::price() const {
+    return AbstractMoon::price();
+}
+
+std::string Corporation::type() const {
+    return AbstractMoon::type();
 }

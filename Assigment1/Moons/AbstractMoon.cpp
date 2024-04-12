@@ -9,6 +9,7 @@ AbstractMoon::AbstractMoon() {
     minScrapValue = 0;
     maxScrapValue = 0;
     moonPrice = 0;
+    moonType = "Free";
 }
 
 void AbstractMoon::sendEmployees(Game& g, int count) {
@@ -81,4 +82,8 @@ void AbstractMoon::sellCargo(Game& g, int amount) {
 
 int AbstractMoon::price() const {
     return moonPrice;
+}
+
+std::string AbstractMoon::type() const {
+    return moonType;
 }

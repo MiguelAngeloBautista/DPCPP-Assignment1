@@ -35,3 +35,11 @@ float Defense::survivalChance() const {
 std::string Defense::weather() const {
     return AbstractMoon::weather();
 }
+
+int Defense::price() const {
+    return AbstractMoon::price();
+}
+
+std::string Defense::type() const {
+    return AbstractMoon::type();
+}
