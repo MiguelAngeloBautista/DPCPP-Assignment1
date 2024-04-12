@@ -8,9 +8,16 @@ std::unordered_map<std::string, AbstractItem*> ItemManager::inventory() {
     return boughtItems;
 }
 
-void ItemManager::buy(std::string item) {
+bool ItemManager::buy(std::string item) {
     AbstractItem* temp = allGameItems[item];
-    boughtItems[temp->name()] = temp;
+    if (temp == nullptr) {
+        return false;
+    }
+    else {
+        boughtItems[temp->name()] = temp;
+        return true;
+    }
+    
 }
 
 void ItemManager::registerItem(AbstractItem* item) {
