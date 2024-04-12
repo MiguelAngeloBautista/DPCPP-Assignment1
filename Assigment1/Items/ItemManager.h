@@ -3,11 +3,13 @@
 #include <unordered_map>
 #include "AbstractItem.h"
 
+class Game;
+
 class ItemManager {
 public:
     std::unordered_map<std::string, AbstractItem*> store(); // Returns allGameItems
     std::unordered_map<std::string, AbstractItem*> inventory(); // Returns boughItems
-    bool buy(std::string item);
+    bool buy(Game& g, std::string item);
     void registerItem(AbstractItem* item);
 private:
     std::unordered_map<std::string, AbstractItem*> allGameItems;
