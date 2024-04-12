@@ -1,13 +1,21 @@
 ﻿#ifndef GAME_H
 #define GAME_H
 #include <iostream>
-//#include "Moons/AbstractMoon.h"
 #include "Moons/Corporation.h"
 #include "Moons/Prototyping.h"
 #include "Moons/Insurance.h"
 #include "Moons/Pledge.h"
 #include "Moons/Defense.h"
 #include "Moons/MoonManager.h"
+
+#include "Items/Backpack.h"
+#include "Items/Flashlight.h"
+#include "Items/HydraulicsMk2.h"
+#include "Items/InverseTeleporter.h"
+#include "Items/ProFlashlight.h"
+#include "Items/Shovel.h"
+#include "Items/Teleporter.h"
+#include "Items/ItemManager.h"
 
 static enum phases { ORBIT, LAND };
 
@@ -31,6 +39,7 @@ public:
 	AbstractMoon* getCurrentMoon();
 	phases getCurrentPhase() const;
 	MoonManager* moonManager;
+	ItemManager* itemManager;
 private:
 	int balance;
 	AbstractMoon* currentMoon;

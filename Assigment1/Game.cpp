@@ -1,11 +1,11 @@
 ﻿#include "Game.h"
 
 Game::Game() {
-    // ItemManager itemManager = new ItemManager();
     
-    // SimulatorManager simulator;
-    // RandomNumberGenerator rng = new RandomNumberGenerator();
     
+    // Simulator simulator;
+    
+    // Register all Moons
     moonManager = new MoonManager();
     moonManager->registerMoon(new Corporation());
     moonManager->registerMoon(new Prototyping());
@@ -13,7 +13,17 @@ Game::Game() {
     moonManager->registerMoon(new Pledge());
     moonManager->registerMoon(new Defense());
 
-    balance = 0;
+    // Register all items
+    itemManager = new ItemManager();
+    itemManager->registerItem(new Flashlight());
+    itemManager->registerItem(new Shovel());
+    itemManager->registerItem(new ProFlashlight());
+    itemManager->registerItem(new Teleporter());
+    itemManager->registerItem(new InverseTeleporter());
+    itemManager->registerItem(new Backpack());
+    itemManager->registerItem(new HydraulicsMk2());
+
+    balance = 150;
     currentMoon = moonManager->moons().at("Corporation"); // new Corporation();
     currentPhase = ORBIT;
     currentDay = 1;
