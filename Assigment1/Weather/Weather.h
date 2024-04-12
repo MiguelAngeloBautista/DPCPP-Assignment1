@@ -4,13 +4,14 @@
 #include <unordered_map>
 
 class Weather {
-private:
+protected:
     std::string weatherName;
 public:
     Weather();
-    virtual ~Weather() = default;
-    virtual std::unordered_map<std::string, float> multipliers() const = 0;
-    virtual std::string name() const;
+    std::unordered_map<std::string, float> multipliers();
+    ~Weather() = default;
+    /*virtual std::unordered_map<std::string, float> multipliers() const;*/
+    std::string name() const;
 };
 
 #endif // WEATHER_H
