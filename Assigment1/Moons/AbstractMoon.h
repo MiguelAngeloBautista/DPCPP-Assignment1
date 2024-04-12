@@ -3,11 +3,6 @@
 #include <iostream>
 #include <tuple>
 
-//#include "../Weather/Clear.h"
-//#include "../Weather/Eclipsed.h"
-//#include "../Weather/Flooded.h"
-//#include "../Weather/Stormy.h"
-
 class Game;
 
 enum class MoonWeathers { Clear = 0, Flooded, Eclipsed, Stormy };

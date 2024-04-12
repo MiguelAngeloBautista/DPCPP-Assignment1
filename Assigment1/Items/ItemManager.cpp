@@ -1,6 +1,20 @@
 #include "ItemManager.h"
 #include "../Game.h"
 
+ItemManager::~ItemManager() {
+    for (auto& item : boughtItems) {
+        delete item.second;
+        item.second = nullptr;
+    }
+    boughtItems.clear();
+
+    for (auto& item : allGameItems) {
+        delete item.second;
+        item.second = nullptr;
+    }
+    allGameItems.clear();
+}
+
 std::unordered_map<std::string, AbstractItem*> ItemManager::store() {
     return allGameItems;
 }

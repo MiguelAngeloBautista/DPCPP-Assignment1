@@ -7,6 +7,7 @@ class Game;
 
 class ItemManager {
 public:
+    ~ItemManager();
     std::unordered_map<std::string, AbstractItem*> store(); // Returns allGameItems
     std::unordered_map<std::string, AbstractItem*> inventory(); // Returns boughItems
     bool buy(Game& g, std::string item);

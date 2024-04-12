@@ -69,7 +69,7 @@ void Game::exit() {
 
 }
 
-int Game::getAliveEmployees() {
+int Game::getAliveEmployees() const{
     return aliveEmployees;
 }
 
@@ -82,11 +82,11 @@ void Game::addCargoValue(int num) {
     cargoValue += num;
 }
 
-int Game::getCargoValue() {
+int Game::getCargoValue() const {
     return cargoValue;
 }
 
-int Game::getQuota() {
+int Game::getQuota() const {
     return quota;
 }
 
@@ -95,11 +95,11 @@ void Game::addBalance(int num) {
     balance += num;
 }
 
-int Game::getBalance() {
+int Game::getBalance() const {
     return balance;
 }
 
-int Game::getCurrentDay() {
+int Game::getCurrentDay() const {
     return currentDay;
 }
 

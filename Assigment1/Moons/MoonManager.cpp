@@ -7,6 +7,7 @@ MoonManager::MoonManager() : allGameMoons() {
 MoonManager::~MoonManager() {
     for (auto& moon : MoonManager::allGameMoons) {
         delete moon.second;
+        moon.second = nullptr;
     }
     MoonManager::allGameMoons.clear();
 }

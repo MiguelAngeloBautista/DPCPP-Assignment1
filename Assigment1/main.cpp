@@ -88,7 +88,7 @@ int main()
                 std::cin >> choice2;
                 lower(choice2);
 
-                if (choice2 == "Yes") {
+                if (choice2 == "yes") {
                     if (g->getBalance() < g->moonManager->moons().at(args[0])->price()) {
                         std::cout << "Not enough funds. Trip cancelled." << std::endl;
                         std::cout << "Still orbiting " << g->getCurrentMoon()->name() << std::endl;
