@@ -58,3 +58,7 @@ void AbstractMoon::onDayBegin(Game& g) {
 void AbstractMoon::setWeather(MoonWeathers weather) {
     currentWeatherCondition = weather;
 }
+
+void AbstractMoon::sellCargo(Game& g, int amount) {
+
+}

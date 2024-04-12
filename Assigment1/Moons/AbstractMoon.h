@@ -3,10 +3,10 @@
 #include <iostream>
 #include <tuple>
 
-#include "../Weather/Clear.h"
-#include "../Weather/Eclipsed.h"
-#include "../Weather/Flooded.h"
-#include "../Weather/Stormy.h"
+//#include "../Weather/Clear.h"
+//#include "../Weather/Eclipsed.h"
+//#include "../Weather/Flooded.h"
+//#include "../Weather/Stormy.h"
 
 class Game;
 
@@ -25,6 +25,7 @@ public:
     virtual std::string weather() const = 0;
     virtual void onDayBegin(Game& g) = 0;
     virtual void setWeather(MoonWeathers weather) = 0;
+    virtual void sellCargo(Game& g, int amount);
 protected:
     std::string moonName;
     MoonWeathers currentWeatherCondition;

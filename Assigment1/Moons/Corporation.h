@@ -7,7 +7,7 @@ class Game;
 class Corporation : public AbstractMoon {
 public:
     Corporation();
-    void sellCargo(Game& g, int amount);
+    void sellCargo(Game& g, int amount) override;
     void onDayBegin(Game& g) override;
     void setWeather(MoonWeathers weather) override;
     const std::string name() const;
