@@ -12,6 +12,9 @@ Game::Game() {
     moonManager->registerMoon(new Insurance());
     moonManager->registerMoon(new Pledge());
     moonManager->registerMoon(new Defense());
+    moonManager->registerMoon(new April());
+    moonManager->registerMoon(new Tore());
+    moonManager->registerMoon(new Hyperion());
 
     // Register all items
     itemManager = new ItemManager();

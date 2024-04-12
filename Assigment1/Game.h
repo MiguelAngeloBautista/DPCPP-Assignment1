@@ -6,6 +6,9 @@
 #include "Moons/Insurance.h"
 #include "Moons/Pledge.h"
 #include "Moons/Defense.h"
+#include "Moons/April.h"
+#include "Moons/Tore.h"
+#include "Moons/Hyperion.h"
 #include "Moons/MoonManager.h"
 
 #include "Items/Backpack.h"

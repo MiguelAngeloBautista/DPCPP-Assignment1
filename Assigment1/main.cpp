@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <limits>
 
 #include "Game.h"
 #include "game_title.h"
@@ -16,7 +17,7 @@ int main()
     Game* g = new Game();
     std::string choice;
     std::vector<std::string> args;
-    
+    g->moonManager->regenerateWeather();
 
     std::cout << DEADLY_CORP_TITLE << std::endl;
 
@@ -26,7 +27,6 @@ int main()
 
     g->printNewDay();
     std::cout << "Currently orbiting: " << g->getCurrentMoon()->name() << std::endl;
-
     while (true) {
         if (g->daysLeft == 0) {
             if (g->getBalance() < g->getQuota()) {
@@ -55,7 +55,10 @@ int main()
             for (auto& moon : g->moonManager->moons()) {
                 std::cout << "* " << moon.first;
                 if (moon.second->weather() != "Clear") {
-                    std::cout << "(" << moon.second->weather() << ")";
+                    std::cout << " (" << moon.second->weather() << ")";
+                }
+                if (moon.second->type() == "Paid") {
+                    std::cout << ": $" << moon.second->price();
                 }
                 std::cout << std::endl;
             }
@@ -78,7 +81,32 @@ int main()
                 std::cout << "\nAlready orbiting " << args[0] << std::endl;
                 continue;
             }
-            
+            if (g->moonManager->moons().at(args[0])->type() == "Paid") {
+                std::cout << "\nThe cost of going to " << args[0] << " is $" << g->moonManager->moons().at(args[0])->price() << std::endl;
+                std::cout << "You have $" << g->getBalance() << ". Confirm destination? [Yes/No]: ";
+                std::string choice2;
+                std::cin >> choice2;
+                lower(choice2);
+
+                if (choice2 == "Yes") {
+                    if (g->getBalance() < g->moonManager->moons().at(args[0])->price()) {
+                        std::cout << "Not enough funds. Trip cancelled." << std::endl;
+                        std::cout << "Still orbiting " << g->getCurrentMoon()->name() << std::endl;
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        continue;
+                    }
+                    g->addBalance(-g->moonManager->moons().at(args[0])->price());
+                    std::cout << "New balance: $" << g->getBalance() << std::endl;
+
+                }
+                else {
+                    std::cout << "Trip cancelled." << std::endl;
+                    std::cout << "Still orbiting " << g->getCurrentMoon()->name() << std::endl;
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    continue;
+                }
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            }
 
             g->setCurrentMoon(g->moonManager->route(args[0]));
             std::cout << "\nNow orbiting " << g->getCurrentMoon()->name() << ". Use the LAND command to land." << std::endl;
