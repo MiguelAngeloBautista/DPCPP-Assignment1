@@ -8,19 +8,15 @@ Insurance::Insurance() {
     maxScrapValue = 50;
 }
 
-void Insurance::onDayBegin(Game& g) {
-    std::cout << "Current Weather: " << weather() << std::endl;
-
-    std::cout << "> "; // Make them do the commands thingy
-    // Allowed Commands: Send
-
+void Insurance::onDayBegin(Game& g) const {
+    AbstractMoon::onDayBegin(g);
 }
 
 void Insurance::setWeather(MoonWeathers weather) {
     AbstractMoon::setWeather(weather);
 }
 
-const std::string Insurance::name() const {
+const std::string& Insurance::name() const {
     return AbstractMoon::name();
 }
 

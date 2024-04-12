@@ -8,19 +8,15 @@ Defense::Defense() {
     maxScrapValue = 70;
 }
 
-void Defense::onDayBegin(Game& g) {
-    std::cout << "Current Weather: " << weather() << std::endl;
-
-    std::cout << "> "; // Make them do the commands thingy
-    // Allowed Commands: Send
-
+void Defense::onDayBegin(Game& g) const {
+    AbstractMoon::onDayBegin(g);
 }
 
 void Defense::setWeather(MoonWeathers weather) {
     AbstractMoon::setWeather(weather);
 }
 
-const std::string Defense::name() const {
+const std::string& Defense::name() const {
     return AbstractMoon::name();
 }
 

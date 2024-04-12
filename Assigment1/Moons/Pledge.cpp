@@ -8,19 +8,15 @@ Pledge::Pledge() {
     maxScrapValue = 50;
 }
 
-void Pledge::onDayBegin(Game& g) {
-    std::cout << "Current Weather: " << weather() << std::endl;
-
-    std::cout << "> "; // Make them do the commands thingy
-    // Allowed Commands: Send
-
+void Pledge::onDayBegin(Game& g) const {
+    AbstractMoon::onDayBegin(g);
 }
 
 void Pledge::setWeather(MoonWeathers weather) {
     AbstractMoon::setWeather(weather);
 }
 
-const std::string Pledge::name() const {
+const std::string& Pledge::name() const {
     return AbstractMoon::name();
 }
 

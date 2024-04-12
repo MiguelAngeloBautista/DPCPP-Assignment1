@@ -8,9 +8,9 @@ class Corporation : public AbstractMoon {
 public:
     Corporation();
     void sellCargo(Game& g, int amount) override;
-    void onDayBegin(Game& g) override;
+    void onDayBegin(Game& g) const override;
     void setWeather(MoonWeathers weather) override;
-    const std::string name() const;
+    const std::string& name() const;
     void sendEmployees(Game& g, int count) override;
     std::tuple<int, int> scrapValues() const override;
     float survivalChance() const override;

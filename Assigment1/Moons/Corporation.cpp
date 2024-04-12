@@ -17,11 +17,14 @@ void Corporation::sellCargo(Game& g, int amount) {
 }
 
 
-void Corporation::onDayBegin(Game& g) {
-    std::cout << "Current Weather: " << weather() << std::endl;
-
-    std::cout << "> "; // Make them do the commands thingy
-    // Allowed Commands: Sell
+void Corporation::onDayBegin(Game& g) const {
+    std::cout << "\nWELCOME TO " << name() << "!\n" << std::endl;
+    g.printNewDay();
+    std::cout << "Number of employees: " << g.getAliveEmployees() << std::endl;
+    
+    std::cout << "\nType SELL to sell your cargo contents and increase your balance and achieve quota. " <<
+        "\nSpecify the amount to sell after the SELL word to only sell a portion of your cargo." << std::endl;
+    std::cout << "Type LEAVE to leave the planet" << std::endl;
 
 }
 
@@ -30,7 +33,7 @@ void Corporation::setWeather(MoonWeathers weather) {
 
 }
 
-const std::string Corporation::name() const {
+const std::string& Corporation::name() const {
     return AbstractMoon::name();
 }
 

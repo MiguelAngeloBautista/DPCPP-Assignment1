@@ -17,7 +17,16 @@ AbstractMoon* MoonManager::route(std::string moonName) {
         std::cerr << "ERROR: allGameMoons vector is empty!" << std::endl;
         return nullptr;
     }
-    return allGameMoons[moonName];
+    
+    try
+    {
+        return allGameMoons.at(moonName);
+    }
+    catch (const std::exception&)
+    {
+        return nullptr;
+    }
+    
 
 }
 
@@ -31,13 +40,6 @@ const std::unordered_map<std::string, AbstractMoon*> MoonManager::moons() const{
 void MoonManager::registerMoon(AbstractMoon* moon) {
     allGameMoons[moon->name()] = moon;
 
-    //AbstractMoon* temp = moon;
-    //std::string tempName = temp->name();
-    ///*std::cout << "TEST registerMoon NAME " << tempName << std::endl;*/
-
-    //allGameMoons[tempName] = temp;
-
-    ///*std::cout << "TEST registerMoon2 NAME " << allGameMoons[tempName]->name() << std::endl;*/
 }
 
 // Call at first load and every time player leaves moon

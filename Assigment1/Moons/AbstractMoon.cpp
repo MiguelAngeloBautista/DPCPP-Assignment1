@@ -7,16 +7,30 @@ AbstractMoon::AbstractMoon() {
     currentWeatherCondition = MoonWeathers::Clear();
     baseSurvivalChance = 1.0;
     minScrapValue = 0;
-    maxScrapValue= 0;
+    maxScrapValue = 0;
+    moonPrice = 0;
 }
 
 void AbstractMoon::sendEmployees(Game& g, int count) {
-    // Calls the simulate() in Simulator
-    //g.setAliveEmployees(from result in simulate());
-    // g.addCargoValue(result from simulate());
+    g.sim->simulate(g, count);
+
+    if (g.getAliveEmployees() == 0) {
+        g.addCargoValue(-g.getCargoValue());
+        g.leave();
+
+        std::cout << "\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+        std::cout << "All the employees died and the scrap is lost." << std::endl;
+        std::cout << "Autopilot will now bring the ship back to orbit." << std::endl;
+        std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+
+        g.printNewDay();
+        std::cout << "Currently orbiting: " << g.getCurrentMoon()->name() << std::endl;
+    }
+
+    
 }
 
-const std::string AbstractMoon::name() const {
+const std::string& AbstractMoon::name() const {
     return moonName;
 }
 
@@ -47,12 +61,14 @@ std::string AbstractMoon::weather() const{
 
 }
 
-void AbstractMoon::onDayBegin(Game& g) {
-    std::cout << "Current Weather: " << weather() << std::endl;
+void AbstractMoon::onDayBegin(Game& g) const {
+    std::cout << "\nWELCOME TO " << name() << "!\n" << std::endl;
+    g.printNewDay();
+    std::cout << "Number of employees: " << g.getAliveEmployees() << std::endl;
 
-    std::cout << "> "; // Make them do the commands thingy
-
-    // Calls sendEmployees(g)
+        std::cout << "\nType SEND followed by the number of employees you wish to send inside the facility." <<
+            "\nAll the other employees will stay on the ship. " << std::endl;
+    std::cout << "Type LEAVE to leave the planet" << std::endl;
 }
 
 void AbstractMoon::setWeather(MoonWeathers weather) {
@@ -61,4 +77,8 @@ void AbstractMoon::setWeather(MoonWeathers weather) {
 
 void AbstractMoon::sellCargo(Game& g, int amount) {
 
+}
+
+int AbstractMoon::price() const {
+    return moonPrice;
 }

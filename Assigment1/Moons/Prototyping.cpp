@@ -8,11 +8,8 @@ Prototyping::Prototyping() {
     maxScrapValue = 30;
 }
 
-void Prototyping::onDayBegin(Game& g) {
-    std::cout << "Current Weather: " << weather() << std::endl;
-
-    std::cout << "> "; // Make them do the commands thingy
-    // Allowed Commands: Send
+void Prototyping::onDayBegin(Game& g) const {
+    AbstractMoon::onDayBegin(g);
 
 }
 
@@ -20,7 +17,7 @@ void Prototyping::setWeather(MoonWeathers weather) {
     AbstractMoon::setWeather(weather);
 }
 
-const std::string Prototyping::name() const {
+const std::string& Prototyping::name() const {
     return AbstractMoon::name();
 }
 
