@@ -17,11 +17,12 @@
 #include "Items/Teleporter.h"
 #include "Items/ItemManager.h"
 
-static enum phases { ORBIT, LAND };
+#include "Simulator.h"
+
+enum phases { ORBIT, LAND };
 
 class Game {
 public:
-	
 	Game();
 	virtual ~Game();
 	void land();
@@ -36,10 +37,14 @@ public:
 	int getBalance();
 	int getCurrentDay();
 	void setCurrentMoon(AbstractMoon* moon);
+	void printNewDay();
+	void madeQuota();
 	AbstractMoon* getCurrentMoon();
 	phases getCurrentPhase() const;
 	MoonManager* moonManager;
 	ItemManager* itemManager;
+	Simulator* sim;
+	int daysLeft;
 private:
 	int balance;
 	AbstractMoon* currentMoon;

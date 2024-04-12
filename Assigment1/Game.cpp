@@ -23,8 +23,10 @@ Game::Game() {
     itemManager->registerItem(new Backpack());
     itemManager->registerItem(new HydraulicsMk2());
 
-    balance = 150;
-    currentMoon = moonManager->moons().at("Corporation"); // new Corporation();
+    sim = new Simulator();
+
+    balance = 50;
+    currentMoon = moonManager->moons().at("Corporation");
     currentPhase = ORBIT;
     currentDay = 1;
     cargoValue = 0;
@@ -37,28 +39,23 @@ Game::Game() {
 
 Game::~Game() {
     delete moonManager;
-    //delete itemManager;
-    //delete simulator;
-    //delete rng;
+    delete itemManager;
+    delete sim;
 
     moonManager = nullptr;
-    //itemManager = nullptr;
-    //simulator = nullptr;
-    //rng = nullptr;
+    itemManager = nullptr;
+    sim = nullptr;
 }
 
 
 void Game::land() {
-    // Call the moon's onDayBegin
     currentPhase = LAND;
-    // currentMoon->onDayBegin(*this);
+    currentMoon->onDayBegin(*this);
 
-    // if (getAliveEmployees == 0) {
-    
-    // }
 }
 
 void Game::leave() {
+    setAliveEmployees(4);
     moonManager->regenerateWeather();
     currentPhase = ORBIT;
     currentDay += 1;
@@ -105,6 +102,33 @@ int Game::getCurrentDay() {
 
 void Game::setCurrentMoon(AbstractMoon* moon) {
     currentMoon = moon;
+}
+
+void Game::printNewDay() {
+    daysLeft = 4 - (getCurrentDay() % 4);
+    if (daysLeft == 4) {
+        daysLeft = 0;
+    }
+
+    std::cout << "\n============= DAY " << getCurrentDay() << " =============" << std::endl;
+    std::cout << "Current cargo value: $" << getCargoValue() << std::endl;
+    std::cout << "Current balance: $" << getBalance() << std::endl;
+    std::cout << "Current quota: $" << getQuota() << " (" << daysLeft << " days left to meet quota)" << std::endl;
+
+    std::cout << "\n>MOONS" << "\nTo see the list of moons the autopilot can route to." << std::endl;
+    std::cout << "\n>STORE" << "\nTo see the company store's selection of useful items." << std::endl;
+    std::cout << "\n>INVENTORY" << "\nTo see the list of items you've already bought." << std::endl;
+
+
+    
+}
+
+void Game::madeQuota() {
+    quota += static_cast<int>(quota * 0.5);
+    std::cout << "\n\n-------------------------------------" << std::endl;
+    std::cout << "CONGRATULATIONS ON MAKING QUOTA!" << std::endl;
+    std::cout << "New quota: $" << quota << std::endl;
+    std::cout << "-------------------------------------\n" << std::endl;
 }
 
 AbstractMoon* Game::getCurrentMoon() {

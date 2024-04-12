@@ -24,23 +24,27 @@ int main()
     std::cout << "We trust you will be a great asset to the corporation!" << std::endl;
     std::cout << std::endl;
 
-    std::cout << "============= DAY " << g->getCurrentDay() << " =============" << std::endl;
-    std::cout << "Current cargo value: $" << g->getCargoValue() << std::endl;
-    std::cout << "Current balance: $" << g->getBalance() << std::endl;
-    std::cout << "Current quota: $" << g->getQuota() << std::endl;
+    g->printNewDay();
     std::cout << "Currently orbiting: " << g->getCurrentMoon()->name() << std::endl;
 
-    std::cout << "\n>MOONS" << "\nTo see the list of moons the autopilot can route to." << std::endl;
-    std::cout << "\n>STORE" << "\nTo see the company store's selection of useful items." << std::endl;
-    std::cout << "\n>INVENTORY" << "\nTo see the list of items you've already bought." << std::endl;
-
-
-
     while (true) {
+        if (g->daysLeft == 0) {
+            if (g->getBalance() < g->getQuota()) {
+                break;
+            }
+            else if (g->getBalance() >= g->getQuota()) {
+                g->madeQuota();
+            }
+            
+            
+        }
+
         std::cout << "\n> ";
         std::getline(std::cin, choice);
         lower(choice);
         splitArguments(choice, args);
+        /*int daysLeft = 4 - (g->getCurrentDay() % 4);*/
+
 
           // ================================================================ MOONS
         if (choice == "moons") {
@@ -61,7 +65,7 @@ int main()
         } // ================================================================ ROUTE
         else if (choice == "route") {
             if (args.empty()) {
-                std::cout << "\nMissing Argument: Moon" << std::endl;
+                std::cout << "\nBad command; the syntax is: \"route moonName\"" << std::endl;
                 continue;
             }
             args[0][0] = toupper(args[0][0]); // Makes first letter uppercase
@@ -69,7 +73,11 @@ int main()
             if (g->moonManager->route(args[0]) == nullptr) {
                 std::cout << "\nInvalid Moon" << std::endl;
                 continue;
-            } 
+            }
+            else if (g->getCurrentMoon()->name() == args[0]) {
+                std::cout << "\nAlready orbiting " << args[0] << std::endl;
+                continue;
+            }
             
 
             g->setCurrentMoon(g->moonManager->route(args[0]));
@@ -77,41 +85,43 @@ int main()
 
         } // ================================================================ LAND
         else if (choice == "land" && g->getCurrentPhase() == ORBIT) {
+            if (g->getCurrentPhase() == LAND) {
+                std::cout << "\nAlready Landed" << std::endl;
+            }
+
             g->land();
-
-            std::cout << "\nWELCOME TO " << g->getCurrentMoon()->name() << "!\n" << std::endl;
-            std::cout << "Current cargo value: $" << g->getCargoValue() << std::endl;
-            std::cout << "Current balance: $" << g->getBalance() << std::endl;
-            std::cout << "Current quota: $" << g->getQuota() << std::endl;
-            std::cout << "Number of employees: " << g->getAliveEmployees() << std::endl;
-
-            if (g->getCurrentMoon()->name() != "Corporation") {
-                std::cout << "\nType SEND followed by the number of employees you wish to send inside the facility." <<
-                    "All the other employees will stay on the ship. ";
-            }
-            else {
-
-            }
-
-            std::cout << "Type LEAVE to leave the planet" << std::endl;
 
         } // ================================================================ SEND
         else if (choice == "send") {
             if (args.empty()) {
-                std::cout << "\nMissing Argument: Number of Employees to send" << std::endl;
+                std::cout << "\nBad command; the syntax is: \"send numberOfEmployees\"" << std::endl;
                 continue;
             }
             else if (g->getCurrentPhase() != LAND or g->getCurrentMoon()->name() == "Corporation") {
                 std::cout << "\nThis command is not available at this time." << std::endl;
                 continue;
             }
+            // Checks if Number
+            try {
+                std::stoi(args[0]);
+            }
+            catch (const std::exception&) {
+                std::cout << "\nBad command; Invalid Number" << std::endl;
+                continue;
+            }
+            // Checks if player has enough alive employees
+            if (std::stoi(args[0]) > g->getAliveEmployees()) {
+                std::cout << "\nError: Not Enough employees" << std::endl;
+                continue;
+            }
 
-            /*g->getCurrentMoon()->sendEmployees()*/
+            g->getCurrentMoon()->sendEmployees(*g, std::stoi(args[0]));
+            
 
         } // ================================================================ SELL
         else if (choice == "sell") {
             if (args.empty()) {
-                std::cout << "\nMissing Argument: Sell Amount" << std::endl;
+                std::cout << "\nBad command; the syntax is: \"sell amount\"" << std::endl;
                 continue;
             }
             else if (g->getCurrentMoon()->name() != "Corporation" or g->getCurrentPhase() == ORBIT) {
@@ -127,16 +137,28 @@ int main()
                 continue;
             }
 
-            g->getCurrentMoon()->sellCargo(*g, std::stoi(args[0]));
+            // Checks if you have enough cargo to sell
+            if (g->getCargoValue() >= std::stoi(args[0])) {
+                g->getCurrentMoon()->sellCargo(*g, std::stoi(args[0]));
+            }
+            else {
+                std::cout << "Error: not enought cargo" << std::endl;
+            }
+
+            std::cout << "Your service is invaluable to the corporation." << std::endl;
+            std::cout << "New Balance: $" << g->getBalance() << " (quota is $" << g->getQuota() << ")" << std::endl;
+            std::cout << "New cargo value: $" << g->getCargoValue() << std::endl;
+
+
+            
 
         } // ================================================================ LEAVE
         else if (choice == "leave" && g->getCurrentPhase() == LAND) {
             g->leave();
 
-            std::cout << std::endl << "============= DAY " << g->getCurrentDay() << " =============" << std::endl;
-            std::cout << "Current cargo value: $" << g->getCargoValue() << std::endl;
-            std::cout << "Current balance: $" << g->getBalance() << std::endl;
-            std::cout << "Current quota: $" << g->getQuota() << std::endl;
+            
+           
+            g->printNewDay();
             std::cout << "Currently orbiting: " << g->getCurrentMoon()->name() << std::endl;
 
         } // ================================================================ STORE
@@ -147,7 +169,7 @@ int main()
             std::cout << "---------------------------------------" << std::endl;
 
             for (auto& item : allItems) {
-                std::cout << "* " << item.first << "// Price: $" << item.second->price() << std::endl;
+                std::cout << "* " << item.first << " // Price: $" << item.second->price() << std::endl;
             }
 
             std::cout << "\nBalance: $" << g->getBalance() << std::endl;
@@ -155,7 +177,7 @@ int main()
         } // ================================================================ BUY
         else if (choice == "buy") {
             if (args.empty()) {
-                std::cout << "\nMissing Argument: Item Name" << std::endl;
+                std::cout << "\nBad command; the syntax is: \"buy itemName\"" << std::endl;
                 continue;
             }
 
@@ -167,7 +189,7 @@ int main()
                 args[0] = args[0] + " " + args[1];
             }
 
-            if (g->itemManager->buy(args[0]) == false) {
+            if (g->itemManager->buy(*g, args[0]) == false) {
                 std::cout << "\nInvalid Item Name" << std::endl;
                 continue;
             }
@@ -197,7 +219,20 @@ int main()
         }
     }
 
+    // Game Over Screen Outside of while loop
+    std::cout << "\n-------------------------------------" << std::endl;
+    std::cout << ">>>>>>>>>>>>> GAME OVER <<<<<<<<<<<<<" << std::endl;
+    std::cout << "-------------------------------------\n" << std::endl;
+
+    std::cout << "You did not meet quota in time, and your employees have been fired." << std::endl;
+    std::cout << "You kept them alive for " << g->getCurrentDay() << " days." << std::endl;
+    g->exit();
+
     delete g;
     g = nullptr;
     return 0;
+}
+
+void gameOver() {
+
 }
