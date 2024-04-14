@@ -103,15 +103,16 @@ int Game::getCurrentDay() const {
     return currentDay;
 }
 
+void Game::addCurrentDay() {
+    currentDay += 1;
+}
+
 void Game::setCurrentMoon(AbstractMoon* moon) {
     currentMoon = moon;
 }
 
 void Game::printNewDay() {
     daysLeft = 4 - (getCurrentDay() % 4);
-    if (daysLeft == 4) {
-        daysLeft = 0;
-    }
 
     std::cout << "\n============= DAY " << getCurrentDay() << " =============" << std::endl;
     std::cout << "Current cargo value: $" << getCargoValue() << std::endl;

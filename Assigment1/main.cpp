@@ -28,12 +28,14 @@ int main()
     g->printNewDay();
     std::cout << "Currently orbiting: " << g->getCurrentMoon()->name() << std::endl;
     while (true) {
-        if (g->daysLeft == 0) {
+        if (g->daysLeft == 4) {
+            g->addCurrentDay();
             if (g->getBalance() < g->getQuota()) {
                 break;
             }
             else if (g->getBalance() >= g->getQuota()) {
                 g->madeQuota();
+                g->printNewDay();
             }
             
             
@@ -254,6 +256,7 @@ int main()
 
     std::cout << "You did not meet quota in time, and your employees have been fired." << std::endl;
     std::cout << "You kept them alive for " << g->getCurrentDay() << " days." << std::endl;
+    std::cin;
     g->exit();
 
     delete g;

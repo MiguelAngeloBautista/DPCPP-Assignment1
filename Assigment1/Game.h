@@ -39,6 +39,7 @@ public:
 	void addBalance(int num);
 	int getBalance() const;
 	int getCurrentDay() const;
+	void addCurrentDay();
 	void setCurrentMoon(AbstractMoon* moon);
 	void printNewDay();
 	void madeQuota();
